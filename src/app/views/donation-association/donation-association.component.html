@@ -1,0 +1,159 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+       
+
+
+
+
+        <div class="row">
+
+            <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <button mat-raised-button class="btn btn-outline-primary btn-rounded" mdbRipple
+                            rippleColor="dark" [routerLink]="['/DonationAssociation']">Dashboard</button>
+                    </div>
+                    <!--<div class="btn-group" role="group" style="margin-left: 15px;">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-outline-lilac dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">      
+                                  Statistics By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" id="roleStatisticsButton" (click)="onOpenModal(null, 'statRole')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartRoleModal">Donations <img style="width: 25px" ></a>
+                            <a class="dropdown-item" id="genderStatisticsButton" (click)="onOpenModal(null, 'statGender')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartGenderModal">Requests <img style="width: 25px" ></a>
+                            <a class="dropdown-item" id="actStatisticsButton" (click)="onOpenModal(null, 'status')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartStatusModal">Associations<img style="width: 25px" ></a>
+                        </div>
+                        <input class="form-control" style="margin-left: 15px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
+                      
+                      </div>-->
+
+                    <div class="col-md-3">
+                        <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple
+                            rippleColor="dark" [routerLink]="['/donations']">Donations</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple
+                            rippleColor="dark" [routerLink]="['/associations']">Associations</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple
+                            rippleColor="dark" [routerLink]="['/requests']">Requests</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Create chart status here. --><br><br>
+    <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+            <h4 class="card-title">
+                Welcome To Donations And Associations Page
+                <p class="category">Donations statistics</p>
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="chartContainer"
+            style="  width: 500px; height: 350px; justify-content: center; align-items: center;margin-left: 140px;">
+            <div id="chart">
+                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+                    [responsive]="chartOptions.responsive"></apx-chart>
+            </div>
+
+        </div>
+        <!-- Create chart type here. -->
+        <div class="chartContainer"
+            style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
+            <div id="chartT">
+                <apx-chart [series]="chartType.series" [chart]="chartType.chart" [labels]="chartType.labels"
+                    [responsive]="chartType.responsive"></apx-chart>
+            </div>
+        </div>
+    </div>
+
+
+    
+<!--stat Requests-->
+
+<!-- Create chart status here. -->
+
+
+
+<div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+        <h4 class="card-title">
+            
+            <p class="category">Donations By Date</p>
+        </h4>
+    </div>
+</div>
+<div>
+    <h2>Donation Statistics</h2>
+
+  </div>
+  <div class="mouna">
+    <select [(ngModel)]="selectedYear" (ngModelChange)="updateChart()">
+      <option *ngFor="let year of years" [value]="year">{{year}}</option>
+    </select>
+  </div>
+  <div>
+    <canvas id="donationChart" style="width: 2000px;height: 1000px;"></canvas>
+  </div>
+    
+
+    
+
+    
+</div>
+  
+   
+
+    
+
+<!--*************************************************************-->
+
+
+
+
+
+
+
+
+<style>
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 400px;
+  width: 80%;
+}
+
+mouna {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+</style>
+
+
+

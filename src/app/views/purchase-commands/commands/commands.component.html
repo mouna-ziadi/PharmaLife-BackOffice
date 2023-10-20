@@ -1,0 +1,623 @@
+<div class="main-content">
+    <div class="container-fluid">
+  
+  
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">content_copy</i>
+              </div>
+              <p class="card-category">Total Commands</p>
+              
+              <h3 class="card-title">{{totalCommand}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons text-danger">warning</i>
+                <a href="javascript:void(0)">Get More Space...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">store</i>
+              </div>
+              <p class="card-category">Total Commands</p>
+              <h3 class="card-title">$34,245</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">date_range</i> Last 24 Hours
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">info_outline</i>
+              </div>
+              <p class="card-category">Total Requests</p>
+              <h3 class="card-title">75</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">local_offer</i> Tracked from Github
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="fa fa-twitter"></i>
+              </div>
+              <p class="card-category">Followers</p>
+              <h3 class="card-title">+245</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">update</i> Just Updated
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+  
+      <div class="row">
+  
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+          <div class="row">
+  
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-primary btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/dashboardCommandsPurchase']">Dashboard</button>
+            </div>
+  
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/commands']">Commands</button>
+            </div>
+            <!-- <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark"
+                >Purchases</button>
+            </div>  -->
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple rippleColor="dark"
+               >stat</button>
+            </div> 
+  
+  
+          </div>
+        </div>
+  
+  
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-success">
+              <h4 class="card-title">commands</h4>
+              <p class="card-category"> All commands For PharmaLife
+  
+                <!-- <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded"
+                (click)="onOpenModal(null!, 'add')">New</button>
+              
+              </p>
+   -->
+  
+            </div>
+  
+            <div class="card-body">
+              <div class="table-responsive" id="main-container">
+                <table class="table table-striped">
+                  <thead class="">
+                    <th>#</th>
+                    <th> Status </th>
+                    <th>Date </th>
+               
+                    <th>ShippingAddress </th>
+                    <th> user ID </th>
+               
+                    <th> List Id Products </th>
+                    <th> Date </th>
+                    <th> Notes </th>
+  
+                    <th style="text-align: center;"> Actions </th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let  command of commands" 
+                  >
+                      
+                      <td>{{command.idCommand}}</td>
+                      <td>{{command.statusCommand}}</td>
+                      <td>{{command.dateCommand}}</td>
+
+                      <td>{{command.shippingAddressCommand}}</td>
+                      <td>{{command.idUser}}</td>
+                   
+                      <td>{{command.productList}}</td>
+                      <td>{{command.dateLivraison}}</td>
+                      <td>{{command.notes}}</td>
+  
+                      <td style="text-align: center;">
+                        
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(command, 'delete')">delete</button> 
+                          <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(command, 'edit')">edit</button>
+
+                       
+                  
+                          
+                        
+                         
+  
+                     
+                    </tr>
+  
+  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+  
+  
+  
+  
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add Command Modal -->
+<div class="modal fade" id="addCommandModal" tabindex="-1" role="dialog" aria-labelledby="addCommandModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content" style="width: 800px;">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addCommandModalLabel"
+        style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Command</B></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddCommand(addForm)" novalidate>
+        <div class="form-group">
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel name="statusCommand" class="form-control" id="statusCommand"
+                aria-describedby="statusCommand" placeholder="statusCommand" required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="date" ngModel name="dateCommand" class="form-control" id="dateCommand"
+                aria-describedby="dateCommand" placeholder="dateCommand" required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel name="shippingAddressCommand" class="form-control" id="shippingAddressCommand"
+                aria-describedby="shippingAddressCommand" placeholder="user@example.com" required>
+              <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="tel" ngModel name="purchaseCommandId" class="form-control" id="purchaseCommandId"
+                aria-describedby="purchaseCommandId" placeholder="purchaseCommandId" required>
+              <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+        
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="number" ngModel name="idUser" class="form-control" id="idUser"
+                aria-describedby="idUser" placeholder="idUser" required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="number" ngModel name="deliveryPersonId" class="form-control" id="deliveryPersonId"
+                aria-describedby="deliveryPersonId" placeholder="deliveryPersonId" required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="date" ngModel name="dateLivraison" class="form-control" id="dateLivraison"
+                aria-describedby="dateLivraison" placeholder="dateLivraison" required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="text" ngModel name="notes" class="form-control" id="notes"
+                aria-describedby="notes" placeholder="notes" required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+       
+
+        
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="add-Command-form" class="btn btn-secondary"
+            data-dismiss="modal">Close</button>
+          <button [disabled]="addForm.invalid" type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- Edit Donation Modal -->
+<div class="modal fade" id="updateCommandModal" tabindex="-1" role="dialog" aria-labelledby="updateCommandModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content" style="width: 800px;">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateCommandModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> Edit Command : {{editCommand?.idCommand }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{editCommand?.idCommand}}" name="idCommand" class="form-control" id="idCommand" placeholder="idCommand">
+
+            <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editCommand?.statusCommand}}" name="statusCommand" class="form-control" id="statusCommand" aria-describedby="emailHelp" placeholder="statusCommand" required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="date" ngModel="{{editCommand?.dateCommand}}" name="dateCommand" class="form-control" id="dateCommand" aria-describedby="dateCommand" placeholder="dateCommand" required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editCommand?.shippingAddressCommand}}" name="shippingAddressCommand" class="form-control" id="shippingAddressCommand" aria-describedby="shippingAddressCommand" placeholder="shippingAddressCommand" required>
+              <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="number" ngModel="{{editCommand?.deliveryPersonId}}" class="form-control" name="deliveryPersonId" id="deliveryPersonId" aria-describedby="deliveryPersonId" placeholder="deliveryPersonId" required>
+              <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="date" ngModel="{{editCommand?.dateLivraison}}" name="dateLivraison" class="form-control" id="dateLivraison" aria-describedby="dateLivraison" placeholder="dateLivraison" required>
+              <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+            </div> 
+            
+            </div>
+          
+          
+          
+      
+          <br>
+
+
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateCommand(editForm.value)" data-dismiss="modal" class="btn btn-success">Edit</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Delete Modal --> 
+<div class="modal fade" id="deleteCommandModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommandModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteCommandModalLabel">Delete Command</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete {{deleteCommand?.idCommand}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteCommand(deleteCommand?.idCommand)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  
+</div>
+</div>   
+
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style>
+    .button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+  
+    .button2 {
+      background-color: #66BA63;
+    }
+  
+    /* green */
+    .button3 {
+      background-color: #80D07D;
+    }
+  
+    /* Red */
+    .button4 {
+      background-color: #5C905A;
+      color: black;
+    }
+  
+    /* Gray */
+    .button5 {
+      background-color: #555555;
+    }
+  
+    /* Black */
+  
+  
+  
+    html,
+    body {
+      display: grid;
+      height: 100vh;
+      place-items: center;
+      background: #be2edd;
+    }
+  
+    .main_div {
+      width: 365px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+    }
+  
+    .main_div .title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+    }
+  
+    .main_div .social_icons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .social_icons a {
+      display: block;
+      height: 45px;
+      width: 100%;
+      line-height: 45px;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s linear;
+    }
+  
+    .social_icons a span {
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  
+    .social_icons a:first-child {
+      margin-right: 5px;
+      background: #4267B2;
+    }
+  
+    .social_icons a:first-child:hover {
+      background: #375695;
+    }
+  
+    .social_icons a:last-child {
+      margin-left: 5px;
+      background: #1DA1F2;
+    }
+  
+    .social_icons a:last-child:hover {
+      background: #0d8bd9;
+    }
+  
+    form {
+      margin-top: 25px;
+    }
+  
+    form .input_box {
+      height: 50px;
+      width: 100%;
+      position: relative;
+      margin-top: 15px;
+    }
+  
+    .input_box input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      padding-left: 45px;
+      font-size: 17px;
+      transition: all 0.3s ease;
+    }
+  
+    .input_box input:focus {
+      border-color: darkcyan;
+    }
+  
+    .input_box .icon {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      color: grey;
+    }
+  
+    form .option_div {
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .option_div .check_box {
+      display: flex;
+      align-items: center;
+    }
+  
+    .option_div span {
+      margin-left: 5px;
+      font-size: 16px;
+      color: #333;
+    }
+  
+    .option_div .forget_div a {
+      font-size: 16px;
+      color: darkcyan;
+    }
+  
+    .button input {
+      padding-left: 0;
+      background: darkcyan;
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s linear;
+    }
+  
+    .button input:hover {
+      background: darkcyan;
+    }
+  
+    form .sign_up {
+      text-align: center;
+      margin-top: 25px;
+    }
+  
+    .sign_up a {
+      color: darkcyan;
+    }
+  
+    form a {
+      text-decoration: none;
+    }
+  
+    form a:hover {
+      text-decoration: underline;
+    }
+  
+  
+    .select-box select {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      color: #707070;
+      font-size: 1rem;
+    }
+  
+    .form .column {
+      display: flex;
+      column-gap: 15px;
+    }
+  
+    .form :where(.select-box) {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+      color: #707070;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0 15px;
+    }
+  
+    .red-text {
+    color: red;
+  }
+  .green-text {
+    color: green;
+  }
+  
+  </style>

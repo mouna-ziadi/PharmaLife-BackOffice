@@ -1,0 +1,540 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+  
+  
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Total Articles</p>
+                        <h3 class="card-title">{{totalArticle}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">warning</i>
+                          <a href="javascript:void(0)">Get More Space...</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <p class="card-category">Total Associations</p>
+                        <h3 class="card-title">$34,245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Last 24 Hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Total Requests</p>
+                        <h3 class="card-title">75</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> Tracked from Github
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Followers</p>
+                        <h3 class="card-title">+245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+          <div class="row">
+  
+           
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark" [routerLink]="['/comment-management']"> Comment </button>
+            </div>
+          <!--  <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/associations']">Associations</button>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/requests']">Requests</button>
+            </div> -->
+  
+  
+          </div>
+        </div>
+  
+        <div class="row">
+            
+            
+  
+       <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Articles</h4>
+                <p class="card-category"> All Article For PharmaLife
+                  
+              <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded" (click)="onOpenModal(null!, 'add')">New</button>
+                
+              </p>
+        
+               <!-- <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+                 </a>-->
+             
+              </div>
+  
+             
+            <div class="card-body">
+              <div class="col-md-3">
+                <input class="form-control" style="margin-right: 1190px;width: 250px;" type="text" placeholder="Search"
+                  [(ngModel)]="searchText">
+              </div>
+                <div class="table-responsive" id="main-container">
+                  <table class = "table table-striped">
+                   
+                    <thead class="">
+                       <th> Name</th>
+                       <th> Image </th>
+                       <th> Description </th>
+                        <th> Date </th>
+                
+                    <th style="text-align: center;"> Actions </th> 
+                   </thead>
+                   <tr *ngFor="let article of article | search: searchText">
+                    <td>{{article.nameArticle}}</td> 
+                    <td><img src="../../../assets/img/article/{{article.imageArticle}}.jpg" height="100" width="100"></td>
+                    <td>{{article.descriptionArticle}}</td> 
+                    <td>{{article.dateArticle}}</td> 
+                    <!--  <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'orange' : (donation.statusDonation === 'accepted' ? 'green' : 'red')}">
+                       <td>{{donation.statusDonation}}</td></span>
+                      <td>
+                          <span class="badge badge-success rounded-pill d-inline">{{donation.statusDonation}}</span>
+                          <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'red' : (donation.statusDonation === 'accepted' ? 'green' : 'orange')}">
+                      </td>
+                      <td>{{donation.idRequest}}</td> 
+                      <td>{{donation.userDonation.firstName}}</td>   -->
+  
+                           <td style="text-align: center;">
+                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'edit')">edit</button>
+                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'delete')">delete</button>
+                          <!--   <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(article, 'detail')">detail</button>
+  
+                           
+  
+                           
+                            <td style="text-align: center;">
+                              <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
+                          <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+                          <a (click)="onOpenModal(association, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a></td>-->
+                           </td>
+                      </tr>
+                      
+                     
+                
+                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+     <!-- Add Article Modal -->
+     <div class="modal fade" id="addArticleModal" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="width: 800px;">
+           <div class="modal-header">
+              <h5 class="modal-title" id="addArticleModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Article</B></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+             <div class="modal-body" >
+                <form #addForm="ngForm" (ngSubmit)="onAddArticle(addForm)" novalidate >
+                <div class="form-group" >
+  
+                <div class="row">
+                 <div class="input_box col-md-6">
+                    <input type="text" ngModel name="nameArticle" class="form-control" id="nameArticle" aria-describedby="emailHelp" placeholder="Article Name" required>
+                    <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+                  </div>
+                  <div class="input_box col-md-6">
+                    <input type="text" ngModel name="imageArticle" class="form-control" id="imageArticle" aria-describedby="imageArticle" placeholder="Aticle Image" required>
+                    <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="input_box col-md-6">
+                    <input type="text" ngModel name="descriptionArticle" class="form-control" id="descriptionArticle" aria-describedby="emailHelp" placeholder="Article Description" required>
+                    <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+                  </div>
+                  <div class="input_box col-md-6">
+                    <input type="date" ngModel name="dateArticle" class="form-control" id="dateArticle" aria-describedby="dateArticle" placeholder="dateArticle" required>
+                    <div class="icon"><i class="fa fa-date" style="color: darkgreen;"></i></div>
+                  </div>
+                </div>
+  
+              <!--  <div class="row">
+                  <div class="input_box col-md-6">
+                    <input type="text" ngModel name="userArticle" class="form-control" id="userArticle" aria-describedby="userArticle" placeholder="userArticle" required>
+                    <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+                  </div> 
+                  </div>
+                 
+  -->
+   
+                
+                <div class="modal-footer">
+                   <button type="button" id="add-Article-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" (click)="playSound()">Save</button>
+                </div>
+             </div>
+  
+    </form>
+   </div>
+</div>
+</div>
+</div>
+
+  <!-- Edit Article Modal -->
+  <div class="modal fade" id="updateArticleModal" tabindex="-1" role="dialog" aria-labelledby="updateArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateArticleModalLabel"> Edit Article with id {{editArticle?.idArticle }} </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+              <input type="hidden" ngModel="{{editArticle?.idArticle}}" name="idArticle" class="form-control" id="idArticle" placeholder="idArticle">
+  
+              <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editArticle?.nameArticle}}" name="nameArticle" class="form-control" id="nameArticle" aria-describedby="emailHelp" placeholder="nameArticle" required>
+                <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editArticle?.imageArticle}}" name="imageArticle" class="form-control" id="imageArticle" aria-describedby="imageArticle" placeholder="imageArticle" required>
+                <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editArticle?.descriptionArticle}}" name="descriptionArticle" class="form-control" id="descriptionArticle" aria-describedby="descriptionArticle" placeholder="descriptionArticle" required>
+                <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="date" ngModel="{{editArticle?.dateArticle}}" class="form-control" name="dateArticle" id="dateArticle" aria-describedby="dateArticle" placeholder="dateArticle" required>
+                <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+            
+             <!-- <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editArticle?.userArticle}}" name="idUser" class="form-control" id="userArticle" aria-describedby="userArticle" placeholder="userArticle" required>
+                <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
+              </div> -->
+            
+  
+         
+              
+        
+            <br>
+  
+  
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button (click)="onUpdateArticle(editForm.value)" data-dismiss="modal" class="btn btn-success" (click)="playSound3()">Edit</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteArticleModal" tabindex="-1" role="dialog" aria-labelledby="deleteArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteArticleModalLabel">Delete Article</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete {{deleteArticle?.idArticle}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteArticle(deleteArticle?.idArticle)" class="btn btn-danger" data-dismiss="modal" (click)="playSound2()">Yes</button>
+             </div>
+          </div>
+       </div>
+    
+  </div>
+  </div>
+  
+  
+  
+  
+   <!-- Detail Article Modal
+   <div class="modal fade" id="detailArticleModal" tabindex="-1" role="dialog" aria-labelledby="detailArticleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content" style="width: 700px;">
+          <div class="modal-header">
+             <h5 class="modal-title" id="detailArticleModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Article : {{editArticle?.idArticle }} </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #detailForm="ngForm">
+             
+              <div class="col-md-12">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Imprimer</a>
+                    </div>
+                </div>
+            </div>  
+             
+              
+        
+            <br>
+  
+  
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button data-dismiss="modal" class="btn btn-success">Imprimer</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+   -->
+  
+  
+  
+  <style>
+     .button {
+       background-color: #4CAF50; /* Green */
+       border: none;
+       color: white;
+       padding: 15px 32px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 16px;
+       margin: 4px 2px;
+       cursor: pointer;
+     }
+     
+     .button2 {background-color: #66BA63;} /* green */
+     .button3 {background-color: #80D07D;} /* Red */ 
+     .button4 {background-color: #5C905A; color: black;} /* Gray */ 
+     .button5 {background-color: #555555;} /* Black */
+  
+  
+  
+  html,body{
+    display: grid;
+    height: 100vh;
+    place-items:center;
+    background: #be2edd;
+  }
+  .main_div{
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+  .main_div .title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .main_div .social_icons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .social_icons a{
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+  }
+  .social_icons a span{
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  .social_icons a:first-child{
+    margin-right: 5px;
+    background: #4267B2;
+  }
+  .social_icons a:first-child:hover{
+    background: #375695;
+  }
+  .social_icons a:last-child{
+    margin-left: 5px;
+    background: #1DA1F2;
+  }
+  .social_icons a:last-child:hover{
+    background: #0d8bd9;
+  }
+  form {
+    margin-top: 25px;
+  }
+  form .input_box{
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+  }
+  .input_box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 17px;
+    transition: all 0.3s ease;
+  }
+  .input_box input:focus{
+    border-color: darkcyan;
+  }
+  .input_box .icon{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+  form .option_div{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .option_div .check_box{
+    display: flex;
+    align-items: center;
+  }
+  .option_div span{
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  .option_div .forget_div a{
+    font-size: 16px;
+    color: darkcyan;
+  }
+  .button input{
+    padding-left: 0;
+    background: darkcyan;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .button input:hover{
+    background: darkcyan;
+  }
+  form .sign_up{
+    text-align: center;
+    margin-top: 25px;
+  }
+  .sign_up a{
+    color: darkcyan;
+  }
+  form a{
+    text-decoration: none;
+  }
+  form a:hover{
+    text-decoration: underline;
+  }
+  
+  
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+  .form :where(.select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+  
+  
+  
+   
+     </style>

@@ -1,0 +1,361 @@
+<br><br><br><br>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;"
+    [routerLink]="['/reclamation-management']">Reclamations</button>
+</div>
+<br>
+<nav class="navbar navbar-expand-lg navbar-toggler bg-white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <h1 style="margin-left: 10px;font-size: 30px;">Category list</h1>
+    </ul>
+    <a style="margin-left: 500px; margin-right:15px;color: white; background: #4d82a3;" class="btn button4"
+      (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="fa fa-plus-circle"
+        aria-hidden="true"></i>
+    </a>
+    <input class="form-control" style="width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
+  </div>
+</nav>
+<div class="card-body">
+  <div class="table-responsive" id="main-container">
+    <table class="table table-striped">
+      <thead class="">
+        <th> Category name </th>
+        <th>Category description</th>
+        <th> Status </th>
+        <th> Actions </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of categories | search:searchText">
+          <td>
+            <input *ngIf="c.nameCategory" [(ngModel)]="c.nameCategory"
+              style="background-color: transparent; border-color: transparent;">
+          </td>
+          <td>
+            <input *ngIf="c.descriptionCategory" [(ngModel)]="c.descriptionCategory"
+              style="background-color: transparent; border-color: transparent;">
+          </td>
+          <td>
+            <span [ngClass]="{'green-tick': c.archived, 'red-cross': !c.archived}">
+              <i *ngIf="!c.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+              <i *ngIf="c.archived" class="fa fa-times" style="color: red;font-size: 18px;"></i>
+            </span>
+          </td>
+          <td>
+            <!-- <a class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Edit"
+          (click)="onUpdateCategory(c)"><i class="fa fa-pencil"></i></a>-->
+            <button (click)="onUpdateCategory(c)" mat-raised-button type="button" matTooltip="Edit category"
+              class="btn btn-primary btn-link btn-sm btn-just-icon">
+              <i class="material-icons">edit</i>
+            </button>
+            <button (click)="onUpdateArchive(c)" mat-raised-button type="button" matTooltip="Archive/disarchive"
+              class="btn btn-success btn-link btn-sm btn-just-icon">
+              <i class="fa fa-archive"></i>
+            </button>
+            <!--<a  class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Archive"
+          (click)="onUpdateArchive(c)"><i class="fa fa-archive" aria-hidden="true"></i></a>-->
+          </td>
+
+        </tr>
+
+
+      </tbody>
+    </table>
+
+
+
+  </div>
+</div>
+<!-- Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document" style="width: 600px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"><B>Add Category</B></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddCategory(addForm)" novalidate>
+          <div class="form-group">
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel name="nameCategory" class="form-control" id="nameCategory"
+                aria-describedby="name" placeholder="Name category" #nameCategory="ngModel" required>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
+            </div>
+            <!-- <div style="float:left;padding-right: 10px;" class="alert alert-danger" *ngIf="nameCategory.errors?.['required'] || nameCategory.touched&& (nameCategory.touched || nameCategory.dirty)">Name category field is required</div>-->
+            <div class="input_box" style="float:left;">
+              <input type="text" ngModel name="descriptionCategory" class="form-control" id="descriptionCategory"
+                aria-describedby="description" placeholder="description category" #descriptionCategory="ngModel"
+                required>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style=" color: #4d82a3"></i></div>
+              <!--<div class="alert alert-danger" *ngIf="descriptionCategory.errors?.['required'] || descriptionCategory.touched&& (descriptionCategory.touched || descriptionCategory.dirty)">Description category field is required</div>-->
+              <br><br>
+            </div>
+          </div>
+          <div class="modal-footer" style="float:left;justify-content: center;">
+            <button type="button" id="add-Category-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button2 {
+    background-color: #66BA63;
+  }
+
+  /* green */
+  .button3 {
+    background-color: #80D07D;
+  }
+
+  /* Red */
+  .button4 {
+    background-color: #5C905A;
+    color: black;
+  }
+
+  /* Gray */
+  .button5 {
+    background-color: #555555;
+  }
+
+  /* Black */
+
+
+
+  html,
+  body {
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    background: #be2edd;
+  }
+
+  .main_div {
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .main_div .title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .main_div .social_icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social_icons a {
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+  }
+
+  .social_icons a span {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+
+  .social_icons a:first-child {
+    margin-right: 5px;
+    background: #4267B2;
+  }
+
+  .social_icons a:first-child:hover {
+    background: #375695;
+  }
+
+  .social_icons a:last-child {
+    margin-left: 5px;
+    background: #1DA1F2;
+  }
+
+  .social_icons a:last-child:hover {
+    background: #0d8bd9;
+  }
+
+  form {
+    margin-top: 25px;
+  }
+
+  form .input_box {
+    height: 50px;
+    width: 50%;
+    position: relative;
+    margin-top: 15px;
+  }
+
+  .input_box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .input_box input:focus {
+    border-color: darkcyan;
+  }
+
+  .input_box .icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+
+  form .option_div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .option_div .check_box {
+    display: flex;
+    align-items: center;
+  }
+
+  .option_div span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .option_div .forget_div a {
+    font-size: 16px;
+    color: darkcyan;
+  }
+
+  .button input {
+    padding-left: 0;
+    background: darkcyan;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+
+  .button input:hover {
+    background: darkcyan;
+  }
+
+  form .sign_up {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .sign_up a {
+    color: darkcyan;
+  }
+
+  form a {
+    text-decoration: none;
+  }
+
+  form a:hover {
+    text-decoration: underline;
+  }
+
+
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+
+  .form :where(.select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .input-box {
+    width: 50%;
+    position: relative;
+  }
+</style>

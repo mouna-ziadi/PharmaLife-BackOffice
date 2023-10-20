@@ -1,0 +1,652 @@
+
+
+<br><br><br><br>
+
+<nav class="navbar navbar-expand-lg navbar-toggler bg-white">
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <h1 style="margin-left: 10px;font-size: 30px;">Users List</h1>
+            <input class="form-control" style="margin-left: 800px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
+          </ul>
+   </div>
+ </nav>
+ 
+ 
+ <div class="btn-group" role="group" style="margin-left: 15px;">
+  <button id="btnGroupDrop1" type="button" class="btn btn-outline-lilac dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">      
+            Statistics By
+  </button>
+  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" id="roleStatisticsButton" (click)="onOpenModal(null, 'statRole')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartRoleModal">Role <img style="width: 25px" ></a>
+      <a class="dropdown-item" id="genderStatisticsButton" (click)="onOpenModal(null, 'statGender')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartGenderModal">Gender <img style="width: 25px" ></a>
+      <a class="dropdown-item" id="actStatisticsButton" (click)="onOpenModal(null, 'status')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartStatusModal">Activation Status <img style="width: 25px" ></a>
+  </div>
+  
+  <!--<div>
+    <label for="role">Role:</label>
+    <select id="role" [(ngModel)]="selectedRole">
+      <option value="Admin">Admin</option>
+      <option value="Danotor">Danotor</option>
+      <option value="Patient">Patient</option>
+      <option value="AssociationMember">Association Member</option>
+      <option value="DrugsProvider">Drugs Provider</option>
+    </select>
+    <button (click)="searchUsersByRole()">Search</button>
+  </div> -->
+
+  <li class="nav-item active">
+    <a style="margin-left: 500px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+     </a>
+  </li>
+</div>
+          <!--    <div>
+                <mat-form-field>
+                  <mat-label>Filter by role</mat-label>
+                  <mat-select [(value)]="roleFilter" (selectionChange)="onRoleFilterChanged($event.value)">
+                    <mat-option [value]="null">All</mat-option>
+                    <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>-->
+ <div class="card-body" >
+ <div class="table-responsive" id="main-container">  
+    <table class = "table table-striped" >
+     <thead class="">
+        <th>First Name</th>
+        <th>Last Name </th>
+        <th> Email</th>
+        <th> Phone Number </th>
+      <th> Address And City </th>
+      <th> Role </th>
+      <th> Enabled</th>
+     <th style="text-align: center;"> Actions </th> 
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | search: searchText">
+            <td> {{ user.firstName}} </td>
+            <td> {{ user.lastName}} </td>
+            <td> {{ user.email}} </td>
+            <td> {{ user.phoneNumber}} </td>
+            <td> {{ user.address}} , {{ user.city}} </td>
+            <td> {{user.role}}</td>
+            <td style="text-align: center;">
+              <span [ngClass]="{'green-tick': user.enabled, 'red-cross': !user.enabled}">
+                <i *ngIf="user.enabled" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+                <i *ngIf="!user.enabled" class="fa fa-times" style="color: red;font-size: 18px;"></i>
+              </span>
+            </td>
+           <!-- <td>
+                <span [style.color]="user.enabled ? 'green' : 'red'">&#10004;</span><span [style.color]="user.enabled ? 'red' : 'green'">&#10008;</span>
+            </td>-->
+          <!--  <td style="text-align: center;">
+                <a (click)="onOpenModal(user, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+            <a (click)="onOpenModal(user, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+            <a (click)="onOpenModal(user, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a>
+          
+          </td>-->
+          <td class="td-actions text-right">
+            <button mat-raised-button type="button" (click)="onOpenModal(user, 'edit')" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+              <i class="material-icons">edit</i>
+          </button>
+          <button mat-raised-button type="button" style="color: red;" (click)="onOpenModal(user, 'delete')" matTooltip="Delete" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+            <i class="material-icons">close</i>
+        </button>
+        <button mat-raised-button type="button" (click)="onOpenModal(user, 'details')" matTooltip="Details" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon">
+          <i class="material-icons">info_outline</i>
+      </button>
+          </td>
+   
+        </tr> 
+      
+
+    </tbody>
+
+      </table>
+    <!--  <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link"  aria-label="Previous" (click)="onPageChange(currentPage - 1)">
+              <span aria-hidden="true">&laquo; Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of totalPagesArray()" [class.active]="currentPage === page">
+            <a class="page-link"  (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link"  aria-label="Next" (click)="onPageChange(currentPage + 1)">
+              <span aria-hidden="true">Next &raquo; </span>
+            </a>
+          </li>
+        </ul>
+      </nav> -->
+   <!-- Add User Modal -->
+   <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="width: 600px;">
+        <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addUserModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>Add User</B></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+           <div class="modal-body">
+              <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)" novalidate>
+              <div class="form-group">
+
+                
+               <div class="input_box" style="float:left;padding-right: 10px;">
+                  <input type="text" ngModel name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name" required>
+                  <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+                </div>
+                <div class="input_box" style="float:left;">
+                  <input type="text" ngModel name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name" required>
+                  <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+                </div>
+                <div class="input_box" style="float:left;padding-right: 10px;">
+                  <input type="text" ngModel name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required>
+                  <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
+                </div>
+                <div class="input_box" style="float:left;">
+                  <input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
+                  <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
+                </div>
+                <div class="input_box" style="float:left;padding-right: 10px;">
+                  <input type="password" ngModel name="password" class="form-control" id="password" aria-describedby="password" placeholder="Password" required>
+                  <div class="icon"><i class="fa fa-lock" style="color: green;"></i></div>
+                </div> 
+                <div class="input_box" style="float:left;">
+                  <input type="date" ngModel name="birthDate" class="form-control" id="birthDate" aria-describedby="birthDate" placeholder="Birth Date" required>
+                  <div class="icon"><i class="fa fa-calendar" style="color: green;"></i></div>
+                </div>
+               
+
+             <div class="input_box" style="float:left;padding-right: 10px;">
+               <input type="text" ngModel name="address" class="form-control" id="address" aria-describedby="address" placeholder="Address" required>
+               <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+             </div>
+             <div class="input_box" style="float:left;">
+               <input type="text" ngModel name="city" class="form-control" id="city" aria-describedby="city" placeholder="City" required>
+               <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+             </div>
+                  
+             <div class="form-group" style="float:left;align-items: center;">
+              <label for="gender" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Gender</label><br>
+             <input type="radio" id="FEMALE" ngModel  name="gender" value="FEMALE">
+             <label for="FEMALE">FEMALE</label>
+             <input type="radio" id="MALE" ngModel name="gender" value="MALE">
+             <label for="MALE">MALE</label>
+         </div>
+         
+
+
+             <div class="input_box" style="float:right">
+               <div class="select-box">
+                  <label for="role" style="color: green;font-size: 17px;"><i class="fa fa-cogs"></i> Role</label><br>
+                 <select id="role" name="role" ngModel>
+                  <option value="Admin" >Admin</option>
+                   <option value="Patient">Patient</option>
+                   <option value="Donator">Donator</option>
+                   <option value="AssociationMember">Association Member</option>
+                   <option value="DrugsProvider">Drugs Provider</option> 
+                 </select>
+               </div>
+             </div>
+            <!--  <div class="form-group" style="float:left;align-items: center;">
+              <img [src]="avatarUrl" alt="User avatar">
+              <label for="avatar">Select Avatar:</label>
+              <input type="file" id="avatar" name="avatar" (change)="onFileSelected($event)">
+            </div>
+             <div class="input_box col-6" >   
+              <div class="form-group">
+								<label for="birthDate" style="color: black;">Image</label>
+								<input type="file" accept="image/*" (change)="onFileSelected($event)" >
+								<img [src]="imgURL" height="200" *ngIf="imgURL">
+							</div>           
+            <input type="button" (click)="onUpload()" value="Upload Image" class="btn1"> -->
+             <!-- <div class="icon"><i class="fa fa-upload" style="color: green;"></i></div>
+            </div>-->
+           <!-- <div class="form-group input_box" style="float:left;padding-bottom: 20px;">
+              <label for="image_user" style="color: green;font-size: 17px;">Image</label>
+              <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="image_user" accept="image/*" (change)="onFileSelected($event)">
+                  <button class="btn " for="image_user">Choose Image</button>
+              </div>
+          </div>-->
+
+        
+
+
+                <br><br>
+            
+              </div>
+              <br><br>
+              <div class="modal-footer" style="float:left;justify-content: center;padding-top: 10px;" >
+                 <button type="button" id="add-User-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" >Save</button>
+              </div>
+              </form>
+           </div>
+        </div>
+      </div>
+  </div>
+  
+
+
+
+
+
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateUserModalLabel"> Edit User with id {{editUser?.idUser }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{editUser?.idUser}}" name="idUser" class="form-control" id="idUser" placeholder="idUser">
+
+
+            <div class="input_box"style="float:left;padding-right: 10px;">
+               <input type="text" ngModel="{{editUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp"  required>
+               <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+             </div>
+             <div class="input_box"style="float:left">
+               <input type="text" ngModel="{{editUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp"  required>
+               <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+             </div>
+
+             <div class="input_box" style="float:left;padding-right: 10px;">
+               <input type="text" ngModel="{{editUser?.email}}"  name="email" class="form-control" id="email" aria-describedby="emailHelp"  required>
+               <div class="icon"><i class="fa fa-envelope" style="color: green;"></i></div>
+             </div>
+             <div class="input_box" style="float:left"> 
+              <input type="text" ngModel="{{editUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" required>
+              <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
+            </div>
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="password" ngModel="{{editUser?.password}}" name="password" class="form-control" id="password" aria-describedby="password" placeholder="Password" required>
+              <div class="icon"><i class="fa fa-lock" style="color: green;"></i></div>
+            </div> 
+            <div class="input_box" style="float:left">
+              <input type="date" ngModel="{{editUser?.birthDate}}" name="birthDate" class="form-control" id="birthDate" aria-describedby="birthDate" placeholder="Birth Date" required>
+              <div class="icon"><i class="fa fa-calendar" style="color: green;"></i></div>
+            </div>
+  
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{editUser?.address}}" name="address" class="form-control" id="address" aria-describedby="address" placeholder="Address" required>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+            </div>
+            <div class="input_box" style="float:left">
+              <input type="text" ngModel="{{editUser?.city}}" name="city" class="form-control" id="city" aria-describedby="city" placeholder="City" required>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+            </div>
+
+             <div class="form-group" style="float:left;align-items: center;">
+               <label for="gender" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Gender</label><br>
+              <input type="radio" id="FEMALE" ngModel="{{editUser?.gender}}"  name="gender" value="FEMALE">
+              <label for="FEMALE">FEMALE</label>
+              <input type="radio" id="MALE" ngModel="{{editUser?.gender}}" name="gender" value="MALE">
+              <label for="MALE">MALE</label>
+          </div>
+
+          <div class="column input_box" style="float:right">
+            <div class="select-box">
+               <label for="role" style="color: green;font-size: 17px;"><i class="fa fa-cogs"></i> Role</label><br>
+              <select id="role" name="role" ngModel="{{editUser?.role}}">
+               <option value="Admin" >Admin</option>
+                <option value="Patient">Patient</option>
+                <option value="Donator">Donator</option>
+                <option value="AssociationMember">Association Member</option>
+                <option value="DrugsProvider">Drugs Provider</option> 
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="float:right; display: none;">
+            <label for="enabled" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Enabled</label><br>
+           <input type="radio" id="true" ngModel="{{editUser?.enabled}}"  name="enabled" value="true">
+           <label for="true" type="hidden">True</label>
+           <input type="radio" id="false" ngModel="{{editUser?.enabled}}" name="enabled" value="false">
+           <label for="false" >False</label>
+       </div>
+          <br>
+          <br>
+
+
+              <div class="modal-footer" style="float:left;justify-content: center;" >
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateUser(editForm.value)" data-dismiss="modal" class="btn btn-success">Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+
+<!-- Details User Modal -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="userDetailsModalLabel"> Details User with id {{detailsUser?.idUser }} </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{detailsUser?.idUser}}" name="idUser" class="form-control" id="idUser" placeholder="idUser" >
+
+            <div class="input_box"style="float:left;padding-right: 10px;">
+               <input type="text" ngModel="{{detailsUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp"  readonly>
+               <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+             </div>
+             <div class="input_box"style="float:left">
+               <input type="text" ngModel="{{detailsUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp"  readonly>
+               <div class="icon"><i class="fa fa-user" style="color: green;"></i></div>
+             </div>
+
+             <div class="input_box" style="float:left;padding-right: 10px;">
+               <input type="text"  ngModel="{{detailsUser?.email}}"  name="email" class="form-control" id="email" aria-describedby="emailHelp"  readonly>
+               <div class="icon" ><i class="fa fa-envelope" style="color: green;"></i></div>
+             </div>
+             <div class="input_box" style="float:left"> 
+              <input type="text" ngModel="{{detailsUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Phone Number" readonly>
+              <div class="icon"><i class="fa fa-phone" style="color: green;"></i></div>
+            </div>
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="date" ngModel="{{detailsUser?.birthDate}}" name="birthDate" class="form-control" id="birthDate" aria-describedby="birthDate"  readonly>
+              <div class="icon"><i class="fa fa-calendar" style="color: green;"></i></div>
+            </div>
+            <div class="input_box" style="float:left">
+              <input type="datetime-local" ngModel="{{detailsUser?.createdAt}}" name="createdAt" class="form-control" id="createdAt" aria-describedby="createdAt"  readonly>
+              <div class="icon"><i class="fa fa-calendar" style="color: green;"></i></div>
+            </div>
+
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{detailsUser?.address}}" name="address" class="form-control" id="address" aria-describedby="address" placeholder="Address" readonly>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+            </div>
+            <div class="input_box" style="float:left">
+              <input type="text" ngModel="{{detailsUser?.city}}" name="city" class="form-control" id="city" aria-describedby="city" placeholder="City" readonly>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: green;"></i></div>
+            </div>
+
+             <div class="form-group" style="float:left;align-items: center;">
+               <label for="gender" style="color: green;font-size: 17px;"><i class="fa fa-venus-mars"></i> Gender: <label style="color: black;font-size: 17px">{{detailsUser?.gender}}</label> </label><br>
+          </div>
+
+          <div class="column input_box" style="float:right">
+            <div class="select-box">
+               <label for="role" style="color: green;font-size: 17px;"><i class="fa fa-cogs"></i> Role: <label style="color: black;font-size: 17px">{{detailsUser?.role}}</label> </label><br>
+            </div>
+          </div>
+          <div class="form-group" style="float:left;align-items: center;">
+            <label for="gender" style="color: green;font-size: 17px;"><i class="fa fa-toggle-on"></i> Enabled: <label style="color: black;font-size: 17px">{{detailsUser?.enabled}}</label> </label><br>
+       </div>
+          <br>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete User</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete User with id {{deleteUser?.idUser}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteUser(deleteUser?.idUser)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  
+</div>
+
+</div>
+
+
+
+
+<div class="tttttt">
+  <label style="color: black;">Choose The Year : </label>
+  <select [(ngModel)]="selectedYear" (ngModelChange)="updateChart()">
+    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+  </select>
+</div>
+<div>
+  <canvas id="UserChart" style="width: 2000px;height: 1000px;"></canvas>
+</div>
+
+
+<style>
+   .button {
+     background-color: #4CAF50; /* Green */
+     border: none;
+     color: white;
+     padding: 15px 32px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 16px;
+     margin: 4px 2px;
+     cursor: pointer;
+   }
+   
+   .button2 {background-color: #66BA63;} /* green */
+   .button3 {background-color: #80D07D;} /* Red */ 
+   .button4 {background-color: #5C905A; color: black;} /* Gray */ 
+   .button5 {background-color: #555555;} /* Black */
+
+
+
+html,body{
+  display: grid;
+  height: 100vh;
+  place-items:center;
+  background: #be2edd;
+}
+.main_div{
+  width: 365px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+.main_div .title{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.main_div .social_icons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.social_icons a{
+  display: block;
+  height: 45px;
+  width: 100%;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+.social_icons a span{
+  margin-left: 5px;
+  font-size: 18px;
+}
+.social_icons a:first-child{
+  margin-right: 5px;
+  background: #4267B2;
+}
+.social_icons a:first-child:hover{
+  background: #375695;
+}
+.social_icons a:last-child{
+  margin-left: 5px;
+  background: #1DA1F2;
+}
+.social_icons a:last-child:hover{
+  background: #0d8bd9;
+}
+form {
+  margin-top: 25px;
+}
+form .input_box{
+  height: 50px;
+  width: 50%;
+  position: relative;
+  margin-top: 15px;
+}
+.input_box input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 45px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.input_box input:focus{
+  border-color: darkcyan;
+}
+.input_box .icon{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: grey;
+}
+form .option_div{
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.option_div .check_box{
+  display: flex;
+  align-items: center;
+}
+.option_div span{
+  margin-left: 5px;
+  font-size: 16px;
+  color: #333;
+}
+.option_div .forget_div a{
+  font-size: 16px;
+  color: darkcyan;
+}
+.button input{
+  padding-left: 0;
+  background: darkcyan;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.button input:hover{
+  background: darkcyan;
+}
+form .sign_up{
+  text-align: center;
+  margin-top: 25px;
+}
+.sign_up a{
+  color: darkcyan;
+}
+form a{
+  text-decoration: none;
+}
+form a:hover{
+  text-decoration: underline;
+}
+
+
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form :where(.select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-box {
+  width: 50%;
+  position: relative;
+}
+
+
+
+tttttt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+ 
+   </style>

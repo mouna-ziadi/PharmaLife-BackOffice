@@ -1,0 +1,137 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Total Commands</p>
+                        <h3 class="card-title">777
+                            
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">warning</i>
+                            <a href="javascript:void(0)">Get More Space...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <p class="card-category">Total Purchase</p>
+                        <h3 class="card-title">888</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Last 24 Hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Total Requests</p>
+                        <h3 class="card-title">555</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> Tracked from Github
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Followers</p>
+                        <h3 class="card-title">+245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            
+                <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+                    <div class="row">
+ 
+                        <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-outline-primary btn-rounded" mdbRipple rippleColor="dark" [routerLink]="['/dashboardCommandsPurchase']">Dashboard</button>
+                        </div>
+
+                        <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark" [routerLink]="['/commands']">Commands</button>
+                        </div>
+                       <!-- <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark">Purchase</button>
+                        </div>-->
+                        <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple rippleColor="dark" [routerLink]="['/stat']">Stat</button>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+        </div>
+
+
+        
+  <!--stat Requests-->
+
+<!-- Create chart status here. --> <br><br>
+<div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+        <h4 class="card-title">
+            
+            <p class="category">Commands Statistics</p>
+        </h4>
+    </div>
+</div>
+<div class="row">
+
+    <div class="chartContainer"
+        style="  width: 500px; height: 350px; justify-content: center; align-items: center;margin-left: 140px;">
+        <div id="chart">
+            <apx-chart [series]="chartRtStatus.series" [chart]="chartRtStatus.chart" [labels]="chartRtStatus.labels"
+                [responsive]="chartRtStatus.responsive"></apx-chart>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+

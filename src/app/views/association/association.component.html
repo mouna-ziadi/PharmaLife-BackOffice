@@ -1,0 +1,798 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+
+
+    <div class="row">
+
+      <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+        <div class="row">
+
+          <div class="col-md-3">
+            <button mat-raised-button class="btn btn-outline-primary btn-rounded" mdbRipple rippleColor="dark"
+              [routerLink]="['/DonationAssociation']">Dashboard</button>
+          </div>
+
+          <div class="col-md-3">
+            <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark"
+              [routerLink]="['/donations']">Donations</button>
+          </div>
+          <div class="col-md-3">
+            <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark"
+              [routerLink]="['/associations']">Associations</button>
+          </div>
+          <div class="col-md-3">
+            <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple rippleColor="dark"
+              [routerLink]="['/requests']">Requests</button>
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">Associations</h4>
+            <p class="card-category"> All Associations For PharmaLife
+
+              <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded"
+                (click)="onOpenModal(null!, 'add')">New</button>
+
+            </p>
+
+            <!-- <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+               </a>-->
+
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" style="margin-left: 1190px;width: 250px;" type="text" placeholder="Search"
+              [(ngModel)]="searchText">
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive" id="main-container">
+              <table class="table table-striped">
+                <thead style="align-items: center;">
+
+                  <th><b>Created At</b> </th>
+                  <th><b>Logo</b> </th>
+                  <th><b>Association Name</b> </th>
+                  <th><b>Email</b> </th>
+                  <th><b>Country</b> </th>
+                  <th><b>Phone Number</b> </th>
+                  <th><b>Since</b> </th>
+                  <!--<th> Address </th>-->
+                  <!-- <th> Description </th>-->
+
+                  <th><b></b></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let  association of associations | search: searchText">
+
+                    <td>{{association.dateAssociation}}</td>
+                    <td><img src="../../../assets/img/AssociationDon/{{association.logoAssocation}}" height="50" width="50"></td>
+
+                    <td>{{association.associationName}}</td>
+                    <td>{{association.emailAssocation}}</td>
+                    <td>{{association.countryAssocation}}</td>
+                    <td>{{association.phoneNumberAssocation}}</td>
+                    <td>{{association.nbAnneeAssociation}} years </td>
+
+
+
+                    <!--<td>{{association.adressAssociation}}</td>-->
+
+
+                    <!--<td>{{association.descriptionAssocation}}</td>-->
+
+
+
+
+                    <td style="text-align: center;">
+                      <!--<button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'edit')">edit</button>-->
+
+                      <!--<button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'delete')">delete</button>-->
+
+
+                      <!--<button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'request')">Requests</button>-->
+
+                      <!--<button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'request')">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                        
+
+                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'takeDonation')">don</button>-->
+
+                      <!--<button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'detail')">More...</button>-->
+
+                      <button type="button" class="btn btn-link btn-sm btn-rounded"
+                        (click)="onOpenModal(association, 'request')" title="requests">
+                        <i class="fa fa-angle-double-right" aria-hidden="true" style="color: green;"></i>
+                      </button>
+                      <button type="button" class="btn btn-link btn-sm btn-rounded" title="more information"
+                        (click)="onOpenModal(association, 'detail')">
+                        <i class="fa fa-info" aria-hidden="true" style="color: goldenrod;"></i>
+                      </button>
+                      <button type="button" class="btn btn-link btn-sm btn-rounded" title="delete"
+                        (click)="onOpenModal(association, 'delete')">
+                        <i class="fa fa-ban" aria-hidden="true" style="color: red;"></i>
+                      </button>
+
+                      <!--<span [ngClass]="{'green-tick': association.nbAnneeAssociation>=3}">
+                        <i *ngIf="association.nbAnneeAssociation>=3" class="fa fa-check"
+                          style="color: green;font-size: 18px;"></i>
+                      </span>-->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Add Association Modal -->
+<div class="modal fade" id="addAssociationModal" tabindex="-1" role="dialog" aria-labelledby="addAssociationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 800px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAssociationModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Association</B></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddAssociation(addForm)" novalidate>
+          <div class="form-group">
+
+            <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel name="associationName" class="form-control" id="associationName"
+                  aria-describedby="emailHelp" placeholder="associationName" required>
+                <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="file" ngModel name="logoAssocation" class="form-control" id="logoAssocation"
+                  aria-describedby="logoAssocation" placeholder="logoAssocation" required>
+                <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel name="emailAssocation" class="form-control" id="emailAssocation"
+                  aria-describedby="emailHelp" placeholder="user@example.com" required>
+                <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="tel" ngModel name="phoneNumberAssocation" class="form-control" id="phoneNumberAssocation"
+                  aria-describedby="phoneNumberAssocation" placeholder="phoneNumberAssocation" required>
+                <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel name="countryAssocation" class="form-control" id="countryAssocation"
+                  aria-describedby="countryAssocation" placeholder="countryAssocation" required>
+                <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="text" ngModel name="adressAssociation" class="form-control" id="adressAssociation"
+                  aria-describedby="adressAssociation" placeholder="Address" required>
+                <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+
+            <div class="input_box">
+              <input type="textarea" ngModel name="descriptionAssocation" class="form-control"
+                id="descriptionAssocation" aria-describedby="descriptionAssocation" placeholder="description" required>
+              <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-Association-form" class="btn btn-secondary"
+              data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Association Modal -->
+<div class="modal fade" id="updateAssociationModal" tabindex="-1" role="dialog"
+  aria-labelledby="updateAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 800px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateAssociationModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"> Edit Association :
+          {{editAssociation?.idAssociation }} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input type="hidden" ngModel="{{editAssociation?.idAssociation}}" name="idAssociation" class="form-control"
+            id="idAssociation" placeholder="idAssociation">
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editAssociation?.associationName}}" name="associationName"
+                class="form-control" id="associationName" aria-describedby="emailHelp" placeholder="associationName"
+                required>
+              <div class="icon"><i class="fa fa-user" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editAssociation?.logoAssocation}}" name="logoAssocation"
+                class="form-control" id="logoAssocation" aria-describedby="logoAssocation" placeholder="logoAssocation"
+                required>
+              <div class="icon"><i class="fa fa-camera-retro" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editAssociation?.emailAssocation}}" name="emailAssocation"
+                class="form-control" id="emailAssocation" aria-describedby="emailHelp" placeholder="emailAssocation"
+                required>
+              <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="tel" ngModel="{{editAssociation?.phoneNumberAssocation}}" class="form-control"
+                name="phoneNumberAssocation" id="phoneNumberAssocation" aria-describedby="phoneNumberAssocation"
+                placeholder="phoneNumberAssocation" required>
+              <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editAssociation?.countryAssocation}}" name="countryAssocation"
+                class="form-control" id="countryAssocation" aria-describedby="countryAssocation"
+                placeholder="countryAssocation" required>
+              <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+            </div>
+            <div class="input_box col-md-6">
+              <input type="text" ngModel="{{editAssociation?.adressAssociation}}" name="adressAssociation"
+                class="form-control" id="adressAssociation" aria-describedby="adressAssociation"
+                placeholder="adressAssociation" required>
+              <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
+            </div>
+          </div>
+
+          <div class="input_box">
+            <input type="text" ngModel="{{editAssociation?.descriptionAssocation}}" name="descriptionAssocation"
+              class="form-control" id="descriptionAssocation" aria-describedby="descriptionAssocation"
+              placeholder="descriptionAssocation" required>
+            <div class="icon"><i class="fa fa-comments-o" style="color: darkgreen;"></i></div>
+          </div>
+
+
+          <br>
+
+
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button (click)="onUpdateAssociation(editForm.value)" data-dismiss="modal"
+              class="btn btn-success">Edit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteAssociationModal" tabindex="-1" role="dialog"
+  aria-labelledby="deleteAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteAssociationModalLabel">Delete Association</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete {{deleteAssociation?.associationName}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteAssociation(deleteAssociation?.idAssociation)" class="btn btn-danger"
+            data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- Detail Association Modal -->
+<div class="modal fade" id="detailAssociationModal" tabindex="-1" role="dialog"
+  aria-labelledby="detailAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 700px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailAssociationModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"> #{{detailsAssociation?.idAssociation}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #detailForm="ngForm">
+
+          <div class="col-md-12">
+            <div class="card card-profile">
+              <div class="card-avatar">
+                <a href="javascript:void(0)">
+                  <img class="img" src="../../../assets/img/AssociationDon/{{detailsAssociation.logoAssocation}}" />
+                </a>
+              </div>
+
+
+
+
+
+
+              <div class="card-body">
+                <h6 class="card-category text-gray">Name:{{detailsAssociation?.associationName}}</h6>
+                <div class="row">
+                  <h4 class="card-title col-md-6">Phone:{{detailsAssociation?.phoneNumberAssocation}}</h4>
+                  <h4 class="card-title col-md-6">Address:{{detailsAssociation?.adressAssociation}}</h4>
+                </div>
+                <div class="row">
+                  <h4 class="card-title col-md-6">Logo:{{detailsAssociation?.logoAssocation}}</h4>
+                  <h4 class="card-title col-md-6">Country:{{detailsAssociation?.countryAssocation}}</h4>
+                </div>
+                <p class="card-description">
+                  {{detailsAssociation?.descriptionAssocation}}
+                </p>
+                <!--<a href="javascript:void(0)" class="btn btn-danger btn-round">PDF</a>-->
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+          <br>
+
+
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button data-dismiss="modal" class="btn btn-success">PDF</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Request Association Modal -->
+<div class="modal fade" id="requestAssociationModal" tabindex="-1" role="dialog"
+  aria-labelledby="requestAssociationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 700px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="requestAssociationModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"> Requests For
+          {{requestAssociationA?.associationName}} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #detailForm="ngForm">
+
+          <div class="col-md-12">
+            <div class="card">
+
+              <div class="card-body table-responsive">
+                <table class="table table-hover">
+                  <thead class="text-warning" style="align-items: center;">
+                    <th><b>Created At</b></th>
+                    <th><b>Request Name</b></th>
+                    <th><b>Type</b></th>
+                    <th><b>Status</b></th>
+                    <th><b>Description</b></th>
+                    <th *ngIf="requestAssociationA.nbAnneeAssociation<3">Actions</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let request of requests">
+                      <td>{{request.dateRequest}}</td>
+                      <td>{{request.nameRequest}}</td>
+                      <td>{{request.requestType}}</td>
+                      <td>{{request.statusRequest}}</td>
+                      <td>{{request.descriptionRequest}}</td>
+                      <td>
+                        <!--<button *ngIf="requestAssociationA.nbAnneeAssociation<3" data-dismiss="modal"
+                          class="btn btn-success"
+                          (click)="onOpenModal(requestAssociationA?.idAssociation, 'takeDonation')">Take
+                          Donation
+                        </button>-->
+                        <button *ngIf="requestAssociationA.nbAnneeAssociation<3" type="button"
+                          class="btn btn-success btn-link btn-sm btn-just-icon" data-dismiss="modal" title="Take me">
+                          <i class="fa fa-hand-rock-o" aria-hidden="true"
+                            (click)="onOpenModal(requestAssociationA?.idAssociation, 'takeDonation')"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Take a Donation Modal -->
+<div class="modal fade" id="takeDonationModal" tabindex="-1" role="dialog" aria-labelledby="takeDonationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 700px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="takeDonationModalLabel"
+          style=" color: darkgreen;font-size: 20px;text-align: center;"> Choose a Donation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #detailForm="ngForm">
+
+
+          <div class="col-md-12">
+            <div class="card">
+
+              <div class="card-body table-responsive">
+                <table class="table table-hover">
+                  <thead class="text-warning">
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Request</th>
+                    <th>Action</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let  donation of donations">
+                      <td>{{donation.idDonation}}</td>
+                      <td><img src="../../../assets/img/AssociationDon/{{donation.imageDonation}}" height="50" width="50"></td>
+                      <td>{{donation.nameDonation}}</td>
+                      <td>{{donation.descriptionDonation}}</td>
+                      <td>{{donation.quantityDonation}}</td>
+                      <td>{{donation.dateDonation}}</td>
+                      <td>{{donation.donationType}}</td>
+
+                      <td>{{donation.idRequest}}</td>
+                      <td>{{donation.userDonation.firstName}}</td>
+
+                      <td>
+                        <!--<button data-dismiss="modal"
+                          class="btn btn-success">Take
+                        </button>-->
+                        <button type="button" class="btn btn-success btn-link btn-sm btn-just-icon">
+                          <i class="material-icons"
+                            (click)="assignRequestToDonation(myRequest,donation.idDonation, takeA?.idAssociation)">TAKE</i>
+                        </button>
+                      </td>
+
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <br>
+
+
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-secondary"
+              (click)="onOpenModal(takeDonationA?.idAssociation, 'request')">Back</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button2 {
+    background-color: #66BA63;
+  }
+
+  /* green */
+  .button3 {
+    background-color: #80D07D;
+  }
+
+  /* Red */
+  .button4 {
+    background-color: #5C905A;
+    color: black;
+  }
+
+  /* Gray */
+  .button5 {
+    background-color: #555555;
+  }
+
+  /* Black */
+
+
+
+  html,
+  body {
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    background: #be2edd;
+  }
+
+  .main_div {
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .main_div .title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .main_div .social_icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social_icons a {
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+  }
+
+  .social_icons a span {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+
+  .social_icons a:first-child {
+    margin-right: 5px;
+    background: #4267B2;
+  }
+
+  .social_icons a:first-child:hover {
+    background: #375695;
+  }
+
+  .social_icons a:last-child {
+    margin-left: 5px;
+    background: #1DA1F2;
+  }
+
+  .social_icons a:last-child:hover {
+    background: #0d8bd9;
+  }
+
+  form {
+    margin-top: 25px;
+  }
+
+  form .input_box {
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+  }
+
+  .input_box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 17px;
+    transition: all 0.3s ease;
+  }
+
+  .input_box input:focus {
+    border-color: darkcyan;
+  }
+
+  .input_box .icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+
+  form .option_div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .option_div .check_box {
+    display: flex;
+    align-items: center;
+  }
+
+  .option_div span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .option_div .forget_div a {
+    font-size: 16px;
+    color: darkcyan;
+  }
+
+  .button input {
+    padding-left: 0;
+    background: darkcyan;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+
+  .button input:hover {
+    background: darkcyan;
+  }
+
+  form .sign_up {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .sign_up a {
+    color: darkcyan;
+  }
+
+  form a {
+    text-decoration: none;
+  }
+
+  form a:hover {
+    text-decoration: underline;
+  }
+
+
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+
+  .form :where(.select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+
+  .red-text {
+    color: red;
+  }
+
+  .green-text {
+    color: green;
+  }
+</style>

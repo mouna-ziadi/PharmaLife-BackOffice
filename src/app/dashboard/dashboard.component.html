@@ -1,0 +1,99 @@
+<br><br><br><br>
+<div style="display: flex; justify-content: center; align-items: center;">
+  
+  <button id="btnGroupDrop1" type="button" class="btn btn-outline-info"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">      
+    Statistics User By
+</button>
+<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+<a class="dropdown-item" id="roleStatisticsButton" (click)="onOpenModal( 'statRole')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartRoleModal">Role <img style="width: 25px" ></a>
+<a class="dropdown-item" id="genderStatisticsButton" (click)="onOpenModal( 'statGender')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartGenderModal">Gender <img style="width: 25px" ></a>
+<a class="dropdown-item" id="actStatisticsButton" (click)="onOpenModal( 'status')" type="button" style="display:yes;" data-toggle="modal" data-target="#chartStatusModal">Activation Status <img style="width: 25px" ></a>
+</div>
+
+
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products And Categories</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Donations</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Articles</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Events</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Commands</button>
+
+</div>
+
+
+<!--EMNA-->
+<!-- Chart Role Modal -->
+<div class="modal fade" id="chartRoleModal" tabindex="-1" role="dialog" aria-labelledby="chartRoleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="chartRoleModalLabel" style="font-size: 30px;color: green;align-items: center;">Role Statistics</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+            <div class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
+              <div id="chart">
+                <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [labels]="chartOptions.labels"
+                  [responsive]="chartOptions.responsive"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+       </div>
+  </div>
+  </div>
+  <!-- Chart Gender Modal -->
+  <div class="modal fade" id="chartGenderModal" tabindex="-1" role="dialog" aria-labelledby="chartGenderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="chartGenderModalLabel" style="font-size: 30px;color: green;align-items: center;">Gender Statistics</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+            <div class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
+              <div id="chart">
+                <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [labels]="chartOptions.labels"
+                  [responsive]="chartOptions.responsive"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+       </div>
+  </div>
+  </div>
+  <!-- Chart Activation Status Modal -->
+  <div class="modal fade" id="chartStatusModal" tabindex="-1" role="dialog" aria-labelledby="chartStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="chartStatusModalLabel" style="font-size: 30px;color: green;align-items: center;">Activation Status Statistics</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+            <div class="chartContainer" style="  width: 500px; height: 350px; justify-content: center; align-items: center;">
+              <div id="chart">
+                <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [labels]="chartOptions.labels"
+                  [responsive]="chartOptions.responsive"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+       </div>
+  </div>
+  </div>
+<!--EMNA-->

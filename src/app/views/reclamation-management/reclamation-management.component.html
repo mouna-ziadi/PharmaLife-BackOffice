@@ -1,0 +1,372 @@
+<br><br><br><br>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <button class="btn btn-outline-info" [routerLink]="['/gift-management']" style="margin-right: 30px;">Gifts</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/product-management']">Products</button>
+  <button class="btn btn-outline-primary" [routerLink]="['/category-management']">Categories</button>
+  <button class="btn btn-outline-success" style="margin-left: 30px;" [routerLink]="['/reclamation-management']">Reclamations</button>
+</div>
+  
+  <br>
+<nav class="navbar navbar-expand-lg navbar-toggler bg-white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <h1 style="margin-left: 10px;font-size: 30px;">Reclamation list</h1>     
+    </ul>
+    <input class="form-control" style="margin-left: 15px;width: 250px;" type="text" placeholder="Search" [(ngModel)]="searchText">
+  </div>
+</nav>
+<div class="card-body">
+  <div class="table-responsive" id="main-container">
+    <table class="table table-striped">
+      <thead class="">
+        <th>Description</th>
+        <th> Reclamation date </th>
+        <th> Sent by</th>
+        <th> About product </th>
+        <th> Status </th>
+        <th style="text-align: center;"> Actions </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reclamations | search:searchText">
+          <td> {{ r.descriptionReclamation}} </td>
+          <td> {{ r.dateReclamation}} </td>
+          <td> {{ r.userProduct.firstName}} {{ r.userProduct.lastName}} </td>
+          <td> {{r.product.nameProduct}} </td>
+          <td style="text-align: center;">
+            <span [ngClass]="{'green-tick': !r.archived, 'red-cross': r.archived}">
+              <i *ngIf="!r.archived" class="fa fa-spinner" aria-hidden="true" style="color:  #4d82a3;font-size: 18px;"></i>
+              <i *ngIf="r.archived" class="fa fa-check" style="color: green;font-size: 18px;"></i>
+            </span>
+          </td>
+          <td style="text-align: center;">
+
+            <a (click)="onOpenModal(r, 'details')" mat-raised-button type="button" matTooltip="Detail reclamation"
+             class="btn btn-info btn-link btn-sm btn-just-icon"><i class="fa fa-info"></i> </a>
+          </td>
+
+        </tr>
+
+
+      </tbody>
+    </table>
+
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Details Reclamation Modal -->
+<div class="modal fade" id="reclamationDetailsModal" tabindex="-1" role="dialog" aria-labelledby="reclamationDetailsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reclamationDetailsModalLabel"> Details reclamation with id {{detailsReclamation?.idReclamation }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input type="hidden" ngModel="{{detailsReclamation?.idReclamation}}" name="idReclamation" class="form-control" id="idReclamation"
+            placeholder="idReclamation">
+            
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{detailsReclamation?.product.nameProduct}}" name="nameProduct"
+                class="form-control" id="nameProduct" aria-describedby="nameProduct" readonly>
+              <div class="icon"><i class="fa fa-shopping-cart" aria-hidden="true" style="color: #4d82a3;"></i></div>
+            </div>
+            <div class="input_box" style="float:left;padding-right: 10px;">
+              <input type="text" ngModel="{{detailsReclamation?.descriptionReclamation}}" name="descriptionReclamation"
+                class="form-control" id="descriptionReclamation" aria-describedby="descriptionReclamation" readonly>
+              <div class="icon"><i class="fa fa-arrow-right" aria-hidden="true" style="color: #4d82a3;"></i></div>
+            </div>
+          <div class="input_box" style="float:left;padding-right: 10px;">
+            <input type="text" ngModel="{{detailsReclamation?.dateReclamation}}" name="dateReclamation"
+              class="form-control" id="dateReclamation" aria-describedby="dateReclamation" readonly>
+            <div class="icon"><i class="fa fa-calendar" aria-hidden="true" aria-hidden="true" style="color: #4d82a3;"></i></div>
+          </div>
+          <div class="input_box" style="float:left ;padding-right: 10px;">
+            <input type="text" ngModel="{{detailsReclamation?.userProduct.firstName}} {{detailsReclamation?.userProduct.lastName}}" name="firstName" class="form-control"
+              id="user" aria-describedby="user" readonly>
+            <div class="icon"><i class="fa fa-user" style="color: #4d82a3;"></i></div>
+          </div>
+          <div class="input_box" style="float:left;padding-right: 10px;">
+            <input type="text" ngModel="{{detailsReclamation?.userProduct.email}}" name="email" class="form-control"
+              id="email" aria-describedby="email" readonly>
+            <div class="icon"><i class="fa fa-envelope" style="color: #4d82a3;"></i></div>
+          </div>
+         <!-- <div class="input_box" style="float:left;padding-right: 10px;">
+            <input type="text" ngModel="{{detailsReclamation?.archived}}" name="archived" class="form-control"
+              id="archived" aria-describedby="archived" readonly>
+              
+            <div class="icon"><i class="fa fa-tasks" style="color: #4d82a3;"></i></div>
+          </div>-->
+         
+
+          <!--<div class="form-group" style="float:left;align-items: center;">
+            <label *ngIf="detailsReclamation.archived" for="status" style="color: green;font-size: 17px;"><i class="fa fa-toggle-on"></i> Status: <label
+                style="color: black;font-size: 17px">
+               archived
+              </label> </label><br>
+          </div>
+          <div class="form-group" style="float:left;align-items: center;">
+            <label *ngIf="!detailsReclamation.archived" for="status" style="color: green;font-size: 17px;"><i class="fa fa-toggle-on"></i> Status: <label
+                style="color: black;font-size: 17px">
+               In progress
+              </label> </label><br>
+          </div>-->
+          <br>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<style>
+  .button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button2 {
+    background-color: #66BA63;
+  }
+
+  /* green */
+  .button3 {
+    background-color: #80D07D;
+  }
+
+  /* Red */
+  .button4 {
+    background-color: #5C905A;
+    color: black;
+  }
+
+  /* Gray */
+  .button5 {
+    background-color: #555555;
+  }
+
+  /* Black */
+
+
+
+  html,
+  body {
+    display: grid;
+    height: 100vh;
+    place-items: center;
+    background: #be2edd;
+  }
+
+  .main_div {
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .main_div .title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .main_div .social_icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .social_icons a {
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+  }
+
+  .social_icons a span {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+
+  .social_icons a:first-child {
+    margin-right: 5px;
+    background: #4267B2;
+  }
+
+  .social_icons a:first-child:hover {
+    background: #375695;
+  }
+
+  .social_icons a:last-child {
+    margin-left: 5px;
+    background: #1DA1F2;
+  }
+
+  .social_icons a:last-child:hover {
+    background: #0d8bd9;
+  }
+
+  form {
+    margin-top: 25px;
+  }
+
+  form .input_box {
+    height: 50px;
+    width: 50%;
+    position: relative;
+    margin-top: 15px;
+  }
+
+  .input_box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .input_box input:focus {
+    border-color: darkcyan;
+  }
+
+  .input_box .icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+
+  form .option_div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .option_div .check_box {
+    display: flex;
+    align-items: center;
+  }
+
+  .option_div span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .option_div .forget_div a {
+    font-size: 16px;
+    color: darkcyan;
+  }
+
+  .button input {
+    padding-left: 0;
+    background: darkcyan;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+
+  .button input:hover {
+    background: darkcyan;
+  }
+
+  form .sign_up {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .sign_up a {
+    color: darkcyan;
+  }
+
+  form a {
+    text-decoration: none;
+  }
+
+  form a:hover {
+    text-decoration: underline;
+  }
+
+
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+
+  .form :where(.select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .input-box {
+    width: 50%;
+    position: relative;
+  }
+</style>

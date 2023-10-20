@@ -1,0 +1,518 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+  
+  
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Total Comments</p>
+                        <h3 class="card-title">{{totalComment}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">warning</i>
+                          <a href="javascript:void(0)">Get More Space...</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <p class="card-category">Total Associations</p>
+                        <h3 class="card-title">$34,245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">date_range</i> Last 24 Hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Total Requests</p>
+                        <h3 class="card-title">75</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> Tracked from Github
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Followers</p>
+                        <h3 class="card-title">+245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+          <div class="row">
+  
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-primary btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/DonationAssociation']">Dashboard</button>
+            </div>
+  
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-secondary btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/article-management']"> Article </button>
+            </div>
+          <!--  <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-success btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/associations']">Associations</button>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button class="btn btn-outline-danger btn-rounded" mdbRipple rippleColor="dark"
+                [routerLink]="['/requests']">Requests</button>
+            </div> -->
+  
+  
+          </div>
+        </div>
+  
+        <div class="row">
+            
+            
+  
+       <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-success">
+                <h4 class="card-title">Comments</h4>
+                <p class="card-category"> All Comment For PharmaLife
+                  
+              <button style="margin-left: 700px" type="button" class="btn btn-warning btn-rounded" (click)="onOpenModal(null!, 'add')">New</button>
+                
+              </p>
+        
+               <!-- <a style="margin-left: 750px;color: white;" class="btn button4"  (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true"><i class="material-icons" style="font-size: 25px;">person_add</i>
+                 </a>-->
+             
+              </div>
+  
+            <div class="card-body">
+              <div class="col-md-3">
+                <input class="form-control" style="margin-right: 1190px;width: 250px;" type="text" placeholder="Search"
+                  [(ngModel)]="searchText">
+              </div>
+                <div class="table-responsive" id="main-container">
+                  <table class = "table table-striped">
+                    <thead class="">
+                        <th> Description </th>
+                        <th> Date </th>
+
+                
+                    <th style="text-align: center;"> Actions </th> 
+                   </thead>
+                   <tr *ngFor="let comment of comment | search: searchText">
+                    <td>{{comment.descriptionComment}}</td> 
+                    <td>{{comment.dateComment}}</td> 
+
+                    <!--  <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'orange' : (donation.statusDonation === 'accepted' ? 'green' : 'red')}">
+                       <td>{{donation.statusDonation}}</td></span>
+                      <td>
+                          <span class="badge badge-success rounded-pill d-inline">{{donation.statusDonation}}</span>
+                          <span [ngStyle]="{'color': donation.statusDonation === 'inProgress' ? 'red' : (donation.statusDonation === 'accepted' ? 'green' : 'orange')}">
+                      </td>
+                      <td>{{donation.idRequest}}</td> 
+                      <td>{{donation.userDonation.firstName}}</td>   -->
+  
+                           <td style="text-align: center;">
+                            <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="onOpenModal(comment, 'delete')">delete</button>
+  
+                           
+  
+                            <!--
+                            <td style="text-align: center;">
+                              <a (click)="onOpenModal(association, 'edit')" class="btn button3" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
+                          <a (click)="onOpenModal(association, 'delete')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+                          <a (click)="onOpenModal(association, 'details')" class="btn button2" data-placement="top" data-toggle="tooltip" data-original-title="Details"><i class="fa fa-info"></i> </a></td>-->
+                           </td>
+                      </tr>
+                      
+                     
+                
+                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+     <!-- Add Comment Modal -->
+     <div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="addCommentModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="width: 800px;">
+           <div class="modal-header">
+              <h5 class="modal-title" id="addCommentModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"><B>New Comment</B></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+             <div class="modal-body" >
+                <form #addForm="ngForm" (ngSubmit)="onAddComment(addForm)" novalidate >
+                <div class="form-group" >
+  
+              
+  
+                <div class="row">
+                  <div class="input_box col-md-6">
+                    <input type="text" ngModel name="descriptionComment" class="form-control" id="descriptionComment" aria-describedby="emailHelp" placeholder="description Comment" required>
+                    <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+                  </div>
+                  <div class="input_box col-md-6">
+                    <input type="date" ngModel name="dateComment" class="form-control" id="dateComment" aria-describedby="dateComment" placeholder="dateComment" required>
+                    <div class="icon"><i class="fa fa-date" style="color: darkgreen;"></i></div>
+                  </div>
+                </div>
+  
+              <!--  <div class="row">
+                  <div class="input_box col-md-6">
+                    <input type="text" ngModel name="userArticle" class="form-control" id="userArticle" aria-describedby="userArticle" placeholder="userArticle" required>
+                    <div class="icon"><i class="fa fa-globe" style="color: darkgreen;"></i></div>
+                  </div> 
+                  </div>
+                 
+  -->
+   
+                
+                <div class="modal-footer">
+                   <button type="button" id="add-Comment-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-success" >Save</button>
+                </div>
+             </div>
+  
+    </form>
+   </div>
+</div>
+</div>
+</div>
+
+  <!-- Edit Comment Modal -->
+  <div class="modal fade" id="updateCommentModal" tabindex="-1" role="dialog" aria-labelledby="updateCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateCommentModalLabel"> Edit Comment with id {{editComment?.idComment }} </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+              <input type="hidden" ngModel="{{editComment?.idComment}}" name="idComment" class="form-control" id="idComment" placeholder="idComment">  
+            <div class="row">
+              <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editComment?.descriptionComment}}" name="descriptionComment" class="form-control" id="descriptionComment" aria-describedby="descriptionComment" placeholder="descriptionComment" required>
+                <div class="icon"><i class="fa fa-envelope" style="color: darkgreen;"></i></div>
+              </div>
+              <div class="input_box col-md-6">
+                <input type="date" ngModel="{{editComment?.dateComment}}" class="form-control" name="dateComment" id="dateComment" aria-describedby="dateComment" placeholder="dateComment" required>
+                <div class="icon"><i class="fa fa-phone" style="color: darkgreen;"></i></div>
+              </div>
+            </div>
+            
+             <!-- <div class="input_box col-md-6">
+                <input type="text" ngModel="{{editComment?.userComment}}" name="idUser" class="form-control" id="userComment" aria-describedby="userComment" placeholder="userComment" required>
+                <div class="icon"><i class="fa fa-location-arrow" style="color: darkgreen;"></i></div>
+              </div> -->
+            
+  
+         
+              
+        
+            <br>
+  
+  
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button  data-dismiss="modal" class="btn btn-success">Edit</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteCommentModalLabel">Delete Comment</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete {{deleteComment?.idComment}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteComment(deleteComment?.idComment)" class="btn btn-danger" data-dismiss="modal" (click)="playSound4()">Yes</button>
+             </div>
+          </div>
+       </div>
+    
+  </div>
+  </div>
+  
+  
+  
+  
+   <!-- Detail Comment Modal -->
+   <div class="modal fade" id="detailCommentModal" tabindex="-1" role="dialog" aria-labelledby="detailCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content" style="width: 700px;">
+          <div class="modal-header">
+             <h5 class="modal-title" id="detailCommentModalLabel" style=" color: darkgreen;font-size: 20px;text-align: center;"> show Comment : {{editComment?.idComment }} </h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #detailForm="ngForm">
+             
+              <div class="col-md-12">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Imprimer</a>
+                    </div>
+                </div>
+            </div>  
+             
+              
+        
+            <br>
+  
+  
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button data-dismiss="modal" class="btn btn-success">Imprimer</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <style>
+     .button {
+       background-color: #4CAF50; /* Green */
+       border: none;
+       color: white;
+       padding: 15px 32px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 16px;
+       margin: 4px 2px;
+       cursor: pointer;
+     }
+     
+     .button2 {background-color: #66BA63;} /* green */
+     .button3 {background-color: #80D07D;} /* Red */ 
+     .button4 {background-color: #5C905A; color: black;} /* Gray */ 
+     .button5 {background-color: #555555;} /* Black */
+  
+  
+  
+  html,body{
+    display: grid;
+    height: 100vh;
+    place-items:center;
+    background: #be2edd;
+  }
+  .main_div{
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+  .main_div .title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .main_div .social_icons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .social_icons a{
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+  }
+  .social_icons a span{
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  .social_icons a:first-child{
+    margin-right: 5px;
+    background: #4267B2;
+  }
+  .social_icons a:first-child:hover{
+    background: #375695;
+  }
+  .social_icons a:last-child{
+    margin-left: 5px;
+    background: #1DA1F2;
+  }
+  .social_icons a:last-child:hover{
+    background: #0d8bd9;
+  }
+  form {
+    margin-top: 25px;
+  }
+  form .input_box{
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+  }
+  .input_box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 17px;
+    transition: all 0.3s ease;
+  }
+  .input_box input:focus{
+    border-color: darkcyan;
+  }
+  .input_box .icon{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+  form .option_div{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .option_div .check_box{
+    display: flex;
+    align-items: center;
+  }
+  .option_div span{
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  .option_div .forget_div a{
+    font-size: 16px;
+    color: darkcyan;
+  }
+  .button input{
+    padding-left: 0;
+    background: darkcyan;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .button input:hover{
+    background: darkcyan;
+  }
+  form .sign_up{
+    text-align: center;
+    margin-top: 25px;
+  }
+  .sign_up a{
+    color: darkcyan;
+  }
+  form a{
+    text-decoration: none;
+  }
+  form a:hover{
+    text-decoration: underline;
+  }
+  
+  
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+  .form :where(.select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+  
+  
+  
+   
+     </style>
